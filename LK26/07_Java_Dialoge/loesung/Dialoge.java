@@ -1,13 +1,11 @@
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Dialoge extends JFrame {
 
@@ -20,7 +18,7 @@ public class Dialoge extends JFrame {
 
 	private void createGUI() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 351, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -28,82 +26,42 @@ public class Dialoge extends JFrame {
 		contentPane.setLayout(null);
 
 		JButton btnAufg1 = new JButton("Aufgabe 1: Zahl zwischen 1 und 100?");
-		btnAufg1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				aufg1();
-			}
-		});
+		btnAufg1.addActionListener(e -> aufg1());
 		btnAufg1.setBounds(12, 12, 320, 25);
 		contentPane.add(btnAufg1);
 
 		JButton btnAufg2 = new JButton("Aufgabe 2: Zahl kleiner als 10 oder größer als 20?");
-		btnAufg2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				aufg2();
-			}
-		});
+		btnAufg2.addActionListener(e -> aufg2());
 		btnAufg2.setBounds(12, 49, 320, 25);
 		contentPane.add(btnAufg2);
 
 		JButton btnAufg3 = new JButton("Aufgabe 3: Gerade Zahl?");
-		btnAufg3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				aufg3();
-			}
-		});
+		btnAufg3.addActionListener(e -> aufg3());
 		btnAufg3.setBounds(12, 86, 320, 25);
 		contentPane.add(btnAufg3);
 
 		JButton btnAufg4 = new JButton("Aufgabe 4: Punkte --> Note");
-		btnAufg4.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				aufg4();
-			}
-		});
+		btnAufg4.addActionListener(e -> aufg4());
 		btnAufg4.setBounds(12, 123, 320, 25);
 		contentPane.add(btnAufg4);
 
 		JButton btnAufgabeMathetrainer = new JButton("Aufgabe 5: Mathe-Trainer");
-		btnAufgabeMathetrainer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				aufg5();
-			}
-		});
+		btnAufgabeMathetrainer.addActionListener(e -> aufg5());
 		btnAufgabeMathetrainer.setBounds(12, 160, 320, 25);
 		contentPane.add(btnAufgabeMathetrainer);
 
 		JButton btnAufg6 = new JButton("Aufgabe 6: x² + p·x + q = 0 lösen");
-		btnAufg6.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				aufg6();
-			}
-		});
+		btnAufg6.addActionListener(e -> aufg6());
 		btnAufg6.setBounds(12, 197, 320, 25);
 		contentPane.add(btnAufg6);
 
 		JButton btnAufg7 = new JButton("Aufgabe 7: Body Maß Index");
-		btnAufg7.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				aufg7();
-			}
-		});
+		btnAufg7.addActionListener(e -> aufg7());
 		btnAufg7.setBounds(12, 234, 320, 25);
 		contentPane.add(btnAufg7);
 
 		JButton btnAufg8 = new JButton("Aufgabe 8: Niedersachsenticket");
-		btnAufg8.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				aufg8();
-			}
-		});
+		btnAufg8.addActionListener(e -> aufg8());
 		btnAufg8.setBounds(12, 271, 320, 25);
 		contentPane.add(btnAufg8);
 	}
@@ -153,7 +111,7 @@ public class Dialoge extends JFrame {
 			return false;
 		}
 	}
-	
+
 	private void aufg3() {
 		// Aufgabe 3
 		String text = JOptionPane.showInputDialog("Gib eine ganze Zahl ein");
@@ -252,22 +210,27 @@ public class Dialoge extends JFrame {
 	}
 
 	private double fahrpreisProPerson(int anzahlPersonen) {
-		return (28 * Math.ceil(anzahlPersonen / 5.0)) / anzahlPersonen;
+		int volleTickets = anzahlPersonen / 5;   // Anzahl kompletter 5er-Tickets (je 61 €)
+		int restPersonen = anzahlPersonen % 5;   // Übrige Personen für ein weiteres Ticket
+
+		int gesamtpreis = volleTickets * 61;
+		if (restPersonen > 0) {
+			gesamtpreis += 29 + (restPersonen - 1) * 8;
+		}
+
+		return (double) gesamtpreis / anzahlPersonen;
 	}
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Dialoge frame = new Dialoge();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				Dialoge frame = new Dialoge();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
