@@ -26,8 +26,8 @@ public class Turtle extends JPanel {
 	}
 
 	/**
-	 * Zeichnet (oder löscht im XOR-Modus) ein kleines rotes Dreieck 
-	 * an der aktuellen Position und Blickrichtung der Turtle.
+	 * Zeichnet (oder löscht im XOR-Modus) ein kleines rotes Dreieck an der
+	 * aktuellen Position und Blickrichtung der Turtle.
 	 */
 	private void zeichneTurtle(Graphics g) {
 		if (g == null) {
@@ -66,8 +66,7 @@ public class Turtle extends JPanel {
 		double yEnde = y + dy;
 
 		g.setColor(Color.BLACK);
-		g.drawLine((int) Math.round(x), (int) Math.round(y),
-				(int) Math.round(xEnde), (int) Math.round(yEnde));
+		g.drawLine((int) Math.round(x), (int) Math.round(y), (int) Math.round(xEnde), (int) Math.round(yEnde));
 		x = xEnde;
 		y = yEnde;
 
@@ -127,8 +126,8 @@ public class Turtle extends JPanel {
 
 	public int getWinkel() {
 		/*
-		 * Umrechnung: Blick nach oben ist 0 Grad (statt 180 wie für die
-		 * interne Rechnung)
+		 * Umrechnung: Blick nach oben ist 0 Grad (statt 180 wie für die interne
+		 * Rechnung)
 		 */
 		if (winkel >= 180) {
 			return (int) Math.round(winkel - 180);

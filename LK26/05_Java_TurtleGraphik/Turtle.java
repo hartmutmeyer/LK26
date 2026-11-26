@@ -26,7 +26,7 @@ public class Turtle extends JPanel {
 	}
 
 	/**
-	 * Zeichnet (oder löscht im XOR-Modus) ein kleines rotes Dreieck 
+	 * Zeichnet (oder löscht im XOR-Modus) ein kleines rotes Dreieck
 	 * an der aktuellen Position und Blickrichtung der Turtle.
 	 */
 	private void zeichneTurtle(Graphics g) {

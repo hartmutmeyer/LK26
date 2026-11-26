@@ -16,56 +16,6 @@ public class Dialoge extends JFrame {
 		createGUI();
 	}
 
-	private void createGUI() {
-		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setBounds(100, 100, 351, 340);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-
-		JButton btnAufg1 = new JButton("Aufgabe 1: Zahl zwischen 1 und 100?");
-		btnAufg1.addActionListener(e -> aufg1());
-		btnAufg1.setBounds(12, 12, 320, 25);
-		contentPane.add(btnAufg1);
-
-		JButton btnAufg2 = new JButton("Aufgabe 2: Zahl kleiner als 10 oder größer als 20?");
-		btnAufg2.addActionListener(e -> aufg2());
-		btnAufg2.setBounds(12, 49, 320, 25);
-		contentPane.add(btnAufg2);
-
-		JButton btnAufg3 = new JButton("Aufgabe 3: Gerade Zahl?");
-		btnAufg3.addActionListener(e -> aufg3());
-		btnAufg3.setBounds(12, 86, 320, 25);
-		contentPane.add(btnAufg3);
-
-		JButton btnAufg4 = new JButton("Aufgabe 4: Punkte --> Note");
-		btnAufg4.addActionListener(e -> aufg4());
-		btnAufg4.setBounds(12, 123, 320, 25);
-		contentPane.add(btnAufg4);
-
-		JButton btnAufgabeMathetrainer = new JButton("Aufgabe 5: Mathe-Trainer");
-		btnAufgabeMathetrainer.addActionListener(e -> aufg5());
-		btnAufgabeMathetrainer.setBounds(12, 160, 320, 25);
-		contentPane.add(btnAufgabeMathetrainer);
-
-		JButton btnAufg6 = new JButton("Aufgabe 6: x² + p·x + q = 0 lösen");
-		btnAufg6.addActionListener(e -> aufg6());
-		btnAufg6.setBounds(12, 197, 320, 25);
-		contentPane.add(btnAufg6);
-
-		JButton btnAufg7 = new JButton("Aufgabe 7: Body Maß Index");
-		btnAufg7.addActionListener(e -> aufg7());
-		btnAufg7.setBounds(12, 234, 320, 25);
-		contentPane.add(btnAufg7);
-
-		JButton btnAufg8 = new JButton("Aufgabe 8: Niedersachsenticket");
-		btnAufg8.addActionListener(e -> aufg8());
-		btnAufg8.setBounds(12, 271, 320, 25);
-		contentPane.add(btnAufg8);
-	}
-
 	private boolean zwischen1und100(int zahl) {
 		if (zahl > 0 && zahl < 101) {
 			return true;
@@ -123,17 +73,6 @@ public class Dialoge extends JFrame {
 		}
 	}
 
-	private void aufg4() {
-		// Aufgabe 4
-		String text;
-		int punkte;
-
-		while ((text = JOptionPane.showInputDialog("Notenpunkte?")) != null) {
-			punkte = Integer.parseInt(text);
-			JOptionPane.showMessageDialog(this, text + " Notenpunkte entsprechen der Note " + punkte2note(punkte));
-		}
-	}
-
 	private int punkte2note(int punkte) {
 		int note = switch (punkte) {
 			case 0 -> 6;
@@ -145,6 +84,17 @@ public class Dialoge extends JFrame {
 			default -> -1;
 		};
 		return note;
+	}
+
+	private void aufg4() {
+		// Aufgabe 4
+		String text;
+		int punkte;
+
+		while ((text = JOptionPane.showInputDialog("Notenpunkte?")) != null) {
+			punkte = Integer.parseInt(text);
+			JOptionPane.showMessageDialog(this, text + " Notenpunkte entsprechen der Note " + punkte2note(punkte));
+		}
 	}
 
 	private void aufg5() {
@@ -198,6 +148,18 @@ public class Dialoge extends JFrame {
 		}
 	}
 
+	private double fahrpreisProPerson(int anzahlPersonen) {
+		int volleTickets = anzahlPersonen / 5;   // Anzahl kompletter 5er-Tickets (je 61 €)
+		int restPersonen = anzahlPersonen % 5;   // Übrige Personen für ein weiteres Ticket
+
+		int gesamtpreis = volleTickets * 61;
+		if (restPersonen > 0) {
+			gesamtpreis += 29 + (restPersonen - 1) * 8;
+		}
+
+		return (double) gesamtpreis / anzahlPersonen;
+	}
+	
 	private void aufg8() {
 		// Aufgabe 8
 		int personen;
@@ -209,16 +171,54 @@ public class Dialoge extends JFrame {
 		}
 	}
 
-	private double fahrpreisProPerson(int anzahlPersonen) {
-		int volleTickets = anzahlPersonen / 5;   // Anzahl kompletter 5er-Tickets (je 61 €)
-		int restPersonen = anzahlPersonen % 5;   // Übrige Personen für ein weiteres Ticket
+	private void createGUI() {
+		setResizable(false);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setBounds(100, 100, 351, 340);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 
-		int gesamtpreis = volleTickets * 61;
-		if (restPersonen > 0) {
-			gesamtpreis += 29 + (restPersonen - 1) * 8;
-		}
+		JButton btnAufg1 = new JButton("Aufgabe 1: Zahl zwischen 1 und 100?");
+		btnAufg1.addActionListener(e -> aufg1());
+		btnAufg1.setBounds(12, 12, 320, 25);
+		contentPane.add(btnAufg1);
 
-		return (double) gesamtpreis / anzahlPersonen;
+		JButton btnAufg2 = new JButton("Aufgabe 2: Zahl kleiner als 10 oder größer als 20?");
+		btnAufg2.addActionListener(e -> aufg2());
+		btnAufg2.setBounds(12, 49, 320, 25);
+		contentPane.add(btnAufg2);
+
+		JButton btnAufg3 = new JButton("Aufgabe 3: Gerade Zahl?");
+		btnAufg3.addActionListener(e -> aufg3());
+		btnAufg3.setBounds(12, 86, 320, 25);
+		contentPane.add(btnAufg3);
+
+		JButton btnAufg4 = new JButton("Aufgabe 4: Punkte --> Note");
+		btnAufg4.addActionListener(e -> aufg4());
+		btnAufg4.setBounds(12, 123, 320, 25);
+		contentPane.add(btnAufg4);
+
+		JButton btnAufgabeMathetrainer = new JButton("Aufgabe 5: Mathe-Trainer");
+		btnAufgabeMathetrainer.addActionListener(e -> aufg5());
+		btnAufgabeMathetrainer.setBounds(12, 160, 320, 25);
+		contentPane.add(btnAufgabeMathetrainer);
+
+		JButton btnAufg6 = new JButton("Aufgabe 6: x² + p·x + q = 0 lösen");
+		btnAufg6.addActionListener(e -> aufg6());
+		btnAufg6.setBounds(12, 197, 320, 25);
+		contentPane.add(btnAufg6);
+
+		JButton btnAufg7 = new JButton("Aufgabe 7: Body Maß Index");
+		btnAufg7.addActionListener(e -> aufg7());
+		btnAufg7.setBounds(12, 234, 320, 25);
+		contentPane.add(btnAufg7);
+
+		JButton btnAufg8 = new JButton("Aufgabe 8: Niedersachsenticket");
+		btnAufg8.addActionListener(e -> aufg8());
+		btnAufg8.setBounds(12, 271, 320, 25);
+		contentPane.add(btnAufg8);
 	}
 
 	/**
